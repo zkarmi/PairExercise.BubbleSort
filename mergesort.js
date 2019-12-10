@@ -17,21 +17,21 @@ function merge(arr1, arr2) {
 }
 
 function mergeSort(arr) {
-  const arrLen = arr.length;
-  arr = split(arr);
-  let i = 0;
 
-  while (i < arrLen - 1) {
-    if (arr[i].length === 1) {
-      i++;
-    } else {
-      const result = split(arr[i]);
-      arr.splice(i, 1, result[0], result[1]);
-    }
+  // base case
+  if(arr.length === 1) {
+    return arr;
   }
-  console.log("arr = ", arr);
-  // const sortedArray = merge(splitArrays[0], splitArrays[1]);
-  // console.log(sortedArray);
+
+  const [firstHalf, secondHalf] = split(arr);
+
+  if(firstHalf.length === 1 && secondHalf.length === 1) {
+    return merge(firstHalf, secondHalf)
+  }
+
+  return merge(mergeSort(firstHalf), mergeSort(secondHalf));
 }
 
-mergeSort([1, 2, 3, 4, 5, 6, 7]);
+
+const result = mergeSort([1, 7, 6, 3, 5, 2, 4]);
+console.log(result)
